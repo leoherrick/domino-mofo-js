@@ -1,7 +1,7 @@
 describe("Player", function() {
 	beforeEach(function() {
 		match = new Match
-		player = new Player(this)
+		player = new Player(match)
   	});
 
 	it("should know if it's a human", function(){
@@ -10,6 +10,31 @@ describe("Player", function() {
 	it("should know if it's a computer", function(){
 		expect(player.is_computer).toBeTruthy()
 	})
+	
+	it("should have a hand (of dominoes)", function(){
+		expect(player.hand).toBeTruthy();
+	})
+	
+	it("should belong to a match", function(){
+		expect(player.match).toEqual(match);
+	})
+
+	it("should belong to a match", function(){
+		expect(player.match).toEqual(match);
+	})
+	
+	describe("#lead_out", function(){
+		it("should add domino to board", function(){
+			//TODO
+		})
+		it("should remove domino from hand", function(){
+			//TODO
+		})
+		it("should send player to back of queue", function(){
+			//TODO
+		})
+	})
+	
 })
 
 
@@ -22,26 +47,7 @@ describe("Player", function() {
 //      @board = @match.current_game.board
 //    end
 //
-//    it "should have a hand (of dominoes)" do
-//      @cpu3.hand.should be_true
-//    end      
 //    
-//    it "should belong to a match" do
-//      @cpu3.match.should be_true
-//    end
-//    
-//    describe "#boolean" do
-//    
-//      it "should know if it's in instance of the Human class" do
-//        human_player = HumanPlayer.new(@match) #subclass of Player
-//        human_player.should be_human_player
-//      end
-//
-//      it "should know if it's in instance of the Computer class" do
-//        computer_player = ComputerPlayer.new(@match) #subclass of Player
-//        computer_player.should be_computer_player
-//      end
-//    end
 //    
 //    describe "#game play" do
 //      
