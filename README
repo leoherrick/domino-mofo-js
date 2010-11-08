@@ -1,0 +1,3 @@
+I am in the process of converting my Domino game from Ruby to Javascript. 
+
+Using Jasmine to write unit tests. To run the jasmine tests, open SpecRunner.html (spec/support/jasmine-1.0.1) in any browser
