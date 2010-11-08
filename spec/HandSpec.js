@@ -1,0 +1,2 @@
+describe("Hand", function() {
+})

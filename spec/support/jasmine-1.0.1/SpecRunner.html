@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="jasmine.css">
+  <script type="text/javascript" src="jasmine.js"></script>
+  <script type="text/javascript" src="jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../../../lib/End.js"></script>
+  <script type="text/javascript" src="../../../lib/Domino.js"></script>
+  <script type="text/javascript" src="../../../lib/Double.js"></script>
+  <script type="text/javascript" src="../../../lib/Spinner.js"></script>
+  <script type="text/javascript" src="../../../lib/DominoGroup.js"></script>
+  <script type="text/javascript" src="../../../lib/PlayerGroup.js"></script>
+  <script type="text/javascript" src="../../../lib/Hand.js"></script>
+  <script type="text/javascript" src="../../../lib/Player.js"></script>
+  <script type="text/javascript" src="../../../lib/HumanPlayer.js"></script>
+  <script type="text/javascript" src="../../../lib/ComputerPlayer.js"></script>
+  <script type="text/javascript" src="../../../lib/Boneyard.js"></script>
+  <script type="text/javascript" src="../../../lib/Scorecard.js"></script>
+  <script type="text/javascript" src="../../../lib/Game.js"></script>
+  <script type="text/javascript" src="../../../lib/Match.js"></script>
+  <script type="text/javascript" src="../../../lib/Announcer.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="../SpecHelper.js"></script>
+  <script type="text/javascript" src="../../EndSpec.js"></script>
+  <script type="text/javascript" src="../../DominoSpec.js"></script>
+  <script type="text/javascript" src="../../DoubleSpec.js"></script>
+  <script type="text/javascript" src="../../SpinnerSpec.js"></script>
+  <script type="text/javascript" src="../../PlayerGroupSpec.js"></script>
+  <script type="text/javascript" src="../../HandSpec.js"></script>
+  <script type="text/javascript" src="../../PlayerSpec.js"></script>
+  <script type="text/javascript" src="../../HumanPlayerSpec.js"></script>
+  <script type="text/javascript" src="../../ComputerPlayerSpec.js"></script>
+  <script type="text/javascript" src="../../DominoGroupSpec.js"></script>
+  <script type="text/javascript" src="../../ScorecardSpec.js"></script>
+  <script type="text/javascript" src="../../BoneyardSpec.js"></script>
+  <script type="text/javascript" src="../../GameSpec.js"></script>
+  <script type="text/javascript" src="../../MatchSpec.js"></script>
+  <script type="text/javascript" src="../../AnnouncerSpec.js"></script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().execute();
+</script>
+
+</body>
+</html>
