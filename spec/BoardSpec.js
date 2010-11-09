@@ -1,3 +1,4 @@
+
 describe("Board", function() {
 	
 	describe("#lead_out", function(){
@@ -15,11 +16,46 @@ describe("Board", function() {
 	})
 	
 	describe("#play_domino_on_board_by_suit", function(){
-		
+		it("should add domino to board", function(){
+			board = TEST_BOARDS.board_with_11_spin_and_12_13_14_15()
+			board.play_domino_on_board_by_suit(new Domino(5,2), board.find_domino_with_suits(1,5), 5)
+			expect(board.length).toEqual(6)
+		})		
+		it("should connect both ends of the dominoes involved", function(){
+			board = TEST_BOARDS.board_with_11_spin_and_12_13_14_15()
+			expect(board.find_domino_with_suits(1,5).is_open()).toBeTruthy()
+			board.play_domino_on_board_by_suit(new Domino(5,2), board.find_domino_with_suits(1,5), 5)
+			expect(board.find_domino_with_suits(1,5).is_open()).toBeFalsy()
+			expect(board.find_domino_with_suits(2,5).is_connected()).toBeTruthy()
+		})	
+		it("should change the score", function(){
+			board = TEST_BOARDS.board_with_11_spin_and_12_13_14_15()
+			expect(board.total_score()).toEqual(14)
+			board.play_domino_on_board_by_suit(new Domino(5,2), board.find_domino_with_suits(1,5), 5)
+			expect(board.total_score()).toEqual(11)			
+		})	
 	})
 	
 })
  
+//       
+//       it "should change the score" do
+//         @board = board_with_11_spin_and_12_13_14_15
+//         expect{
+//           @board.play_domino_on_board_by_suit(Domino.new(5,2), @board.find_domino_with_suits(1,5), 5)
+//         }.to change{
+//           @board.total_score
+//         }.from(14).to(11)
+//       end
+//       
+//       it "should promote a domino to spinner if it's the first double" do
+//         @board = board_with_12_25_56
+//         @board.play_domino_on_board_by_suit(Double.new(6), @board.find_domino_with_suits(5,6), 6)
+//         @board.should have_domino_with_suits(6,6)
+//         @board.find_domino_with_suits(6,6).should be_instance_of(Spinner)
+//       end
+//     end
+
 //   describe Board do
 // 
 //     it "should be a kind of domino group" do
@@ -144,7 +180,6 @@ describe("Board", function() {
 //     end
 //   end
 // 
-
 TEST_BOARDS = {
 	board_with_11_spin_and_12_13_14: function(){
 		board = new Board
@@ -155,12 +190,12 @@ TEST_BOARDS = {
 		return board
 	},
 	board_with_11_spin_and_12_13_14_15: function(){
-		board = board_with_11_spin_and_12_13_14()
+		board = TEST_BOARDS.board_with_11_spin_and_12_13_14()
 		board.play_domino_on_board_by_suit(new Domino(1,5), board.find_domino_with_suits(1,1), 1)
 		return board
 	},
 	board_with_11_spin_and_12_13_14_44: function(){
-		board = board_with_11_spin_and_12_13_14()
+		board = TEST_BOARDS.board_with_11_spin_and_12_13_14()
 		board.play_domino_on_board_by_suit(new Double(4), board.find_domino_with_suits(1,4), 4)
 		return board
 	},

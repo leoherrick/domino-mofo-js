@@ -44,93 +44,83 @@ describe("Domino", function() {
 			expect(two_two.is_double()).toBeTruthy()
 		})
 	})
+	
+	describe("#connect_to_another_domino_by_suit", function(){
+		it("should connect correct end of self", function(){
+			two_end_of_12 = one_two.ends[1]
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(two_end_of_12.is_connected()).toBeTruthy()
+		})
+		it("should connect correct end other domino", function(){
+			two_end_of_23 = two_three.ends[0]
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(two_end_of_23.is_connected()).toBeTruthy()
+		})
+	})
+
+
+	describe("#score", function(){
+		it("should return all pips of a domino with two open ends", function(){
+			expect(one_two.score()).toEqual(3)
+		})
+		it("should return pips only from open side (if other side is connected)", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(one_two.score()).toEqual(1)
+		})
+		it("should return 0 if both sides are connected", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			one_two.connect_to_another_domino_by_suit(new Double(1), 1)
+			expect(one_two.score()).toEqual(0)
+		})
+	})
+	
+	describe("#find_end_of_suit", function(){
+		it("should return the End object with given suit belonging to given domino", function(){
+			expect(one_two.find_end_of_suit(2).has_suit(2)).toBeTruthy()
+		})
+		it("should return nil if no ends of domino match given suit", function(){
+			expect(one_two.find_end_of_suit(5)).toBeFalsy()
+		})
+	})
+	
+	describe("#is_open", function(){
+		it("should return true if 1+ ends are not connected", function(){
+			expect(one_two.is_open()).toBeTruthy()
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(one_two.is_open()).toBeTruthy()			
+		})
+		it("should return false if both ends are connected", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			one_two.connect_to_another_domino_by_suit(new Double(1), 1)
+			expect(one_two.is_open()).toBeFalsy()			
+		})
+	})
+	
+	describe("#is_connected", function(){
+		it("should return true if 1+ ends are connected", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(one_two.is_connected()).toBeTruthy()			
+			one_two.connect_to_another_domino_by_suit(new Double(1), 1)
+			expect(one_two.is_connected()).toBeTruthy()			
+		})
+		it("should return false if no ends are connected", function(){
+			expect(one_two.is_connected()).toBeFalsy()			
+		})
+	})
+	
+	describe("#find_all_open_ends", function(){
+		it("should return 2 ends if given domino has 2 open ends", function(){
+			expect(one_two.find_all_open_ends().length).toEqual(2)
+		})
+		it("should return 1 end if given domino has 1 open end", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			expect(one_two.find_all_open_ends().length).toEqual(1)
+		})
+		it("should return [] if given domino has no open ends", function(){
+			one_two.connect_to_another_domino_by_suit(two_three, 2)
+			one_two.connect_to_another_domino_by_suit(new Double(1), 1)
+			expect(one_two.find_all_open_ends().length).toEqual(0)
+		})
+	})		
 })
 
-//    
-//    describe "#open?" do
-//      it "should return true if 1+ ends are not connected" do
-//        one_two.should be_open
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)
-//        one_two.should be_open
-//      end
-//      it "should reutrn false if both ends are connected" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)
-//        one_two.connect_to_another_domino_by_suit(Double.new(1), 1)
-//        one_two.should_not be_open
-//      end
-//    end
-//    describe "#connected?" do
-//      it "should return true if 1+ ends are connected" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)
-//        one_two.should be_connected
-//        one_two.connect_to_another_domino_by_suit(Double.new(1), 1)
-//        one_two.should be_connected
-//      end
-//      it "should return false if no ends are connected" do
-//        one_two
-//        one_two.should_not be_connected
-//      end
-//    end    
-//    
-//    describe "#find_end_of_suit" do
-//      it "should return the End object with given suit belonging to given domino" do
-//        one_two.find_end_of_suit(2).should be_kind_of(End)
-//        one_two.find_end_of_suit(2).should be_a_suit(2)
-//      end
-//      it "should return nil if no ends of domino match given suit" do
-//        one_two.find_end_of_suit(5).should be_nil
-//      end
-//    end
-//    
-//    describe "#find_all_open_ends" do
-//      it "should return two ends if given domino has two open ends" do
-//        one_two.find_all_open_ends.should have(2).ends
-//      end
-//      it "should return one ends if given domino has one open ends" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)        
-//        one_two.find_all_open_ends.should have(1).end
-//      end
-//      it "should return [] if given domino has no open ends" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)
-//        one_two.connect_to_another_domino_by_suit(Double.new(1), 1)
-//        one_two.find_all_open_ends.should have(0).ends
-//        one_two.find_all_open_ends.should == []
-//      end
-//    end
-//    
-//    describe "#score" do
-//      it "should return all pips of a domino with two open ends" do
-//        one_two.score.should equal(3)
-//      end
-//      it "should return pips only from open side (if other side is connected)" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)     
-//        one_two.score.should equal(1)
-//      end
-//      it "should return 0 if both sides are connected" do
-//        one_two.connect_to_another_domino_by_suit(two_three, 2)
-//        one_two.connect_to_another_domino_by_suit(Double.new(1), 1)
-//        one_two.score.should equal(0)
-//      end
-//    end
-//    
-//    describe "#connect_to_another_domino_by_suit" do
-//      it "should connect correct end of self" do
-//        two_end_of_12 = one_two.ends[1]
-//        expect{
-//          one_two.connect_to_another_domino_by_suit(two_three, 2)          
-//        }.to change{
-//          two_end_of_12.connected?
-//        }.from(false).to(true)
-//      end
-//      it "should connect correct end of other domino" do
-//        two_end_of_23 = two_three.ends[0]
-//        expect{
-//          one_two.connect_to_another_domino_by_suit(two_three, 2)          
-//        }.to change{
-//          two_end_of_23.connected?
-//        }.from(false).to(true)
-//      end
-//    end
-//  end
-//end
-//

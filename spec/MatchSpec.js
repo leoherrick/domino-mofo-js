@@ -22,13 +22,13 @@ describe("Match", function() {
 	})
 	
 	it("should have created one human plauer", function(){
-		expect(match.players.find(
+		expect(match.players.find_all(
 			function(player){return player.is_human}
 		).length).toEqual(1)
 	})
 	
 	it("should have created 3 computer players by default", function(){
-		expect(match.players.find(
+		expect(match.players.find_all(
 			function(player){return player.is_computer()}
 		).length).toEqual(3)
 	})
